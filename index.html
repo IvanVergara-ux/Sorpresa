@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #000000, #1a0524); /* Fondo Negro a Morado oscuro */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: #e0b0ff; /* Lila claro para el texto */
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(20, 0, 30, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5); /* Resplandor morado */
+            max-width: 90%;
+            width: 400px;
+            border: 1px solid #4b0082;
+            position: relative;
+        }
+
+        /* Espacio para la foto o GIF */
+        .img-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 2px solid #9932cc;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #d896ff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            min-height: 60px; /* Para evitar saltos bruscos */
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        #btnSi {
+            background-color: #8a2be2; /* Azul violeta */
+            color: white;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        #btnSi:hover {
+            transform: scale(1.1);
+            background-color: #9932cc;
+        }
+
+        #btnNo {
+            background-color: #333;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Mensaje final oculto al principio */
+        #mensaje-final {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart {
+            color: #ff007f;
+            font-size: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="pregunta-screen">
+            <div class="img-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDNqbnBwN254MzZ4Z3Bub21wM2V6bzY2c3VwM3IxeHVrbHlncGUwdyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" alt="Cute Gif">
+            </div>
+            
+            <h1>¿Mi amor quieres ser mi San Valentín?</h1>
+            <p>Y... ¿te gustaría pasar la noche del 14 de febrero conmigo? Te tengo un plancito jskjkjjak</p>
+            
+            <div class="buttons">
+                <button id="btnSi">Claro que sí mi amor</button>
+                <button id="btnNo">No, te odio</button>
+            </div>
+        </div>
+
+        <div id="mensaje-final">
+            <div class="img-container">
+                 <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Celebration">
+            </div>
+            <h1>¿Si? KJAAJKAJKAJ, ya sabia yo que dirias que si <span class="heart">Para nada fuiste obligada a decir que si</span></h1>
+            <p>Me alegro mucho mi vida 🤍. Tengo pensado hacer varias cosas lindas contigo, claramente si no tienes nada que hacer y si tienes el tiempo y el espacio.</p>
+            <p>Si no pues no pasa nada, se puede hacer otro dia, te amo mucho mi reina hermosa🤍</p>
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const screenPregunta = document.getElementById('pregunta-screen');
+        const screenMensaje = document.getElementById('mensaje-final');
+        
+        let scale = 1;
+
+        // Función para el botón NO: Se achica cada vez que se presiona
+        btnNo.addEventListener('click', () => {
+            scale -= 0.2; // Reduce el tamaño un 20% cada vez
+            
+            if (scale <= 0.2) {
+                // Si es muy pequeño, desaparece por completo
+                btnNo.style.display = 'none';
+            } else {
+                btnNo.style.transform = `scale(${scale})`;
+            }
+        });
+
+        // Opcional: También se achica si pasa el mouse por encima (para hacerlo más difícil)
+        btnNo.addEventListener('mouseenter', () => {
+            scale -= 0.1;
+            if (scale <= 0.1) {
+                btnNo.style.display = 'none';
+            } else {
+                btnNo.style.transform = `scale(${scale})`;
+            }
+        });
+
+        // Función para el botón SI
+        btnSi.addEventListener('click', () => {
+            screenPregunta.style.display = 'none'; // Oculta la pregunta
+            screenMensaje.style.display = 'block'; // Muestra el mensaje
+            
+            // Efecto de confetti simple (opcional visual)
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const colors = ['#8a2be2', '#d896ff', '#ffffff'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+            }
+            
+            // Estilo dinámico para la caída
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes fall {
+                    to { transform: translateY(100vh) rotate(720deg); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+        }
+    </script>
+</body>
+</html>
